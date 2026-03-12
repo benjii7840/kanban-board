@@ -14,6 +14,20 @@ const App = () => {
           done: [],
         };
   });
+  function handleAddCard(columnId, title) {
+    const newCard = {
+      id: Date.now(),
+      title: title,
+      description: "",
+    };
+    setBoard({ ...board, [columnId]: [...board[columnId], newCard] });
+  }
+  function handleDeleteCard(columnId, cardId) {
+    setBoard({
+      ...board,
+      [columnId]: board[columnId].filter((card) => card.id !== cardId),
+    });
+  }
   useEffect(() => {
     localStorage.setItem("board", JSON.stringify(board));
   }, [board]);
@@ -21,9 +35,16 @@ const App = () => {
     <Routes>
       <Route
         path="/"
-        element={<Dashboard board={board} setBoard={setBoard} />}
+        element={
+          <Dashboard
+            board={board}
+            setBoard={setBoard}
+            handleAddCard={handleAddCard}
+            handleDeleteCard={handleDeleteCard}
+          />
+        }
       />
-      <Route path="/card/id" element={<CardDetail />} />
+      <Route path="/card/:id" element={<CardDetail />} />
     </Routes>
   );
 };
