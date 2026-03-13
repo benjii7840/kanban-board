@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import Card from "./Card";
 
 const Column = ({
   title,
@@ -22,7 +23,12 @@ const Column = ({
       </div>
       <div>
         {cards.map((card) => (
-          <div key={card.id}>{card.title}</div>
+          <Card
+            key={card.id}
+            card={card}
+            columnId={columnId}
+            handleDeleteCard={handleDeleteCard}
+          />
         ))}
       </div>
       <div>
