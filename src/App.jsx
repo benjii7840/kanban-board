@@ -28,6 +28,20 @@ const App = () => {
       [columnId]: board[columnId].filter((card) => card.id !== cardId),
     });
   }
+  function handleUpdateCard(cardId, updatedTitle, updatedDescription) {
+    const updateColumn = (column) =>
+      column.map((card) =>
+        card.id === cardId
+          ? { ...card, title: updatedTitle, description: updatedDescription }
+          : card,
+      );
+
+    setBoard({
+      todo: updateColumn(board.todo),
+      inProgress: updateColumn(board.inProgress),
+      done: updateColumn(board.done),
+    });
+  }
   useEffect(() => {
     localStorage.setItem("board", JSON.stringify(board));
   }, [board]);
@@ -44,7 +58,12 @@ const App = () => {
           />
         }
       />
-      <Route path="/card/:id" element={<CardDetail board={board} />} />
+      <Route
+        path="/card/:id"
+        element={
+          <CardDetail board={board} handleUpdateCard={handleUpdateCard} />
+        }
+      />
     </Routes>
   );
 };
