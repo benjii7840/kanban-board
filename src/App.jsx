@@ -44,7 +44,7 @@ const App = () => {
           />
         }
       />
-      <Route path="/card/:id" element={<CardDetail />} />
+      <Route path="/card/:id" element={<CardDetail board={board} />} />
     </Routes>
   );
 };
