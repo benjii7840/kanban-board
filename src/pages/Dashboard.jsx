@@ -1,5 +1,5 @@
 import Board from "../components/Board";
-import Sidebar from "../components/sideBar";
+import Sidebar from "../components/sidebar";
 
 const Dashboard = ({ board, setBoard, handleAddCard, handleDeleteCard }) => {
   return (
